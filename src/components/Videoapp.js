@@ -5,6 +5,32 @@ import "./style.css";
 const Videoapp = () => {
   const videoRefs = useRef([]);
 
+  const handleVideoClick = (video) => {
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  };
+
+  const handleFirstInteraction = () => {
+    const videos = videoRefs.current;
+
+    videos.forEach((video) => {
+      video.muted = true;
+    });
+
+    document.removeEventListener("click", handleFirstInteraction);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleFirstInteraction);
+
+    return () => {
+      document.removeEventListener("click", handleFirstInteraction);
+    };
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const videos = videoRefs.current;
@@ -29,14 +55,6 @@ const Videoapp = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleVideoClick = (video) => {
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
-  };
 
   return (
     <div className="container">
