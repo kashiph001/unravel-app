@@ -1,35 +1,17 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { videoArr } from "../utils/utils";
 import "./style.css";
 
 const Videoapp = () => {
   const videoRefs = useRef([]);
-
-  const handleVideoClick = (video) => {
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
-  };
-
-  const handleFirstInteraction = () => {
-    const videos = videoRefs.current;
-
-    videos.forEach((video) => {
-      video.muted = true;
-    });
-
-    document.removeEventListener("click", handleFirstInteraction);
-  };
+  const [currentVideo, setCurrentVideo] = useState();
 
   useEffect(() => {
-    document.addEventListener("click", handleFirstInteraction);
-
-    return () => {
-      document.removeEventListener("click", handleFirstInteraction);
-    };
-  }, []);
+    console.log(currentVideo);
+    if (currentVideo) {
+      currentVideo.play();
+    }
+  }, [currentVideo]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,13 +19,11 @@ const Videoapp = () => {
 
       videos.forEach((video) => {
         const rect = video.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-
+        const isVisible =
+          rect.top < window.innerHeight / 2 &&
+          rect.bottom >= window.innerHeight / 2;
         if (isVisible) {
-          const isPaused = video.paused;
-          if (isPaused) {
-            video.play();
-          }
+          setCurrentVideo(video);
         } else {
           video.pause();
         }
@@ -62,16 +42,11 @@ const Videoapp = () => {
         const recommendation = arr.data.recommendation;
         return recommendation.map((video, index) => (
           <div className="video_wrapper" key={video.video_url.med + index}>
-            {/* <div
-              className="video_container"
-              style={{ backgroundColor: "blue" }}
-            ></div> */}
             <video
               className="video_container"
               key={video.video_url.med}
               ref={(ref) => (videoRefs.current[index] = ref)}
-              onClick={() => handleVideoClick(videoRefs.current[index])}
-              controls
+              controls={true}
             >
               <source
                 src={video.video_url.med}
