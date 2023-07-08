@@ -62,6 +62,10 @@ const Videoapp = () => {
         const recommendation = arr.data.recommendation;
         return recommendation.map((video, index) => (
           <div className="video_wrapper" key={video.video_url.med + index}>
+            {/* <div
+              className="video_container"
+              style={{ backgroundColor: "blue" }}
+            ></div> */}
             <video
               className="video_container"
               key={video.video_url.med}
@@ -69,7 +73,11 @@ const Videoapp = () => {
               onClick={() => handleVideoClick(videoRefs.current[index])}
               controls
             >
-              <source src={video.video_url.med} type="video/mp4" />
+              <source
+                src={video.video_url.med}
+                type="video/mp4"
+                className="video"
+              />
             </video>
           </div>
         ));
