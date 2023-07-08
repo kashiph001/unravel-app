@@ -1,10 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
+import useScrollSnap from "react-use-scroll-snap";
 import { videoArr } from "../utils/utils";
 import "./style.css";
 
 const Videoapp = () => {
   const videoRefs = useRef([]);
   const [currentVideo, setCurrentVideo] = useState();
+  const scrollRef = useRef(null);
+  useScrollSnap({ ref: scrollRef, duration: 50, delay: 20 });
 
   useEffect(() => {
     console.log(currentVideo);
@@ -38,7 +41,7 @@ const Videoapp = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" ref={scrollRef}>
       {videoArr.map((arr, index) => {
         const recommendation = arr.data.recommendation;
         return recommendation.map((video, index) => (
@@ -49,7 +52,6 @@ const Videoapp = () => {
               ref={(ref) => (videoRefs.current[index] = ref)}
               controls={true}
               autoPlay
-              muted
             >
               <source
                 src={video.video_url.med}
