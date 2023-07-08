@@ -10,6 +10,7 @@ const Videoapp = () => {
     console.log(currentVideo);
     if (currentVideo) {
       currentVideo.play();
+      currentVideo.muted = false;
     }
   }, [currentVideo]);
 
@@ -47,6 +48,8 @@ const Videoapp = () => {
               key={video.video_url.med}
               ref={(ref) => (videoRefs.current[index] = ref)}
               controls={true}
+              autoPlay
+              muted
             >
               <source
                 src={video.video_url.med}
