@@ -7,10 +7,12 @@
 
 .video_wrapper {
   margin: 10vh auto;
+  width: 100%;
 }
 
 .video_container {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
 }
 
 @media screen and (min-aspect-ratio: 16/9) {
@@ -29,10 +31,10 @@
 
 @media screen and (max-width: 768px) {
   .video_wrapper {
-    padding-top: 0;
+    margin: 0;
   }
 
-  .video_container {
+   .video_container {
     top: 0;
     left: 0;
     width: 100%;
