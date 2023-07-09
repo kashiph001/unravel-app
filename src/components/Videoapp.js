@@ -5,6 +5,7 @@ import "./style.css";
 const Videoapp = () => {
   const videoRefs = useRef([]);
   const [currentVideo, setCurrentVideo] = useState();
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     if (currentVideo) {
@@ -39,7 +40,6 @@ const Videoapp = () => {
   }, []);
 
   const handleVideoClick = (index) => {
-    console.log(index);
     const clickedVideo = videoRefs.current[index];
     setCurrentVideo(clickedVideo);
     if (clickedVideo.paused) {
@@ -48,22 +48,29 @@ const Videoapp = () => {
       clickedVideo.pause();
     }
   };
+
   return (
     <div className="container">
       {videoArr.map((arr, index) => {
         const recommendation = arr.data.recommendation;
-        return recommendation.map((video, index) => (
+        return recommendation.map((video, innerIndex) => (
           <div
-            className="video_wrapper  y mandatory-scroll-snapping"
-            key={video.video_url.med + index}
+            className="video_wrapper y mandatory-scroll-snapping"
+            key={video.video_url.med + innerIndex}
             dir="ltr"
           >
+            <div
+              className="sound-icon"
+              onClick={() => setIsMuted(!isMuted)}
+            >
+              {isMuted ? "🔇" : "🔊"}
+            </div>
             <video
               className="video_container"
               key={video.video_url.med}
               ref={(ref) => (videoRefs.current[index] = ref)}
-              autoPlay={index === 0 ? true : false}
-              muted
+              autoPlay={innerIndex === 0}
+              muted={isMuted}
               onClick={() => handleVideoClick(index)}
             >
               <source
