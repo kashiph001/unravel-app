@@ -73,6 +73,7 @@ const Videoapp = () => {
               key={video.video_url.med}
               ref={(ref) => (videoRefs.current[index] = ref)}
               autoPlay={index === 0 ? true : false}
+              loop
               muted={isMuted}
               onClick={() => handleVideoClick(index)}
             >
