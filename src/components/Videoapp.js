@@ -48,7 +48,7 @@ const Videoapp = () => {
               key={video.video_url.med}
               ref={(ref) => (videoRefs.current[index] = ref)}
               controls={true}
-              autoPlay
+              autoPlay={index === 0 ? true : false}
             >
               <source
                 src={video.video_url.med}
