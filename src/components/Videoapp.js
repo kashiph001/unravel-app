@@ -5,18 +5,14 @@ import "./style.css";
 const Videoapp = () => {
   const videoRefs = useRef([]);
   const [currentVideo, setCurrentVideo] = useState();
-
-  useEffect(() => {
-    const videosss = videoRefs.current;
-    videosss[0].muted = true;
-  });
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     if (currentVideo) {
-      currentVideo.muted = true;
+      currentVideo.muted = isMuted;
       currentVideo.play();
     }
-  }, [currentVideo]);
+  }, [currentVideo, isMuted]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +23,7 @@ const Videoapp = () => {
         const isVisible =
           rect.top < window.innerHeight / 2 &&
           rect.bottom >= window.innerHeight / 2;
+
         if (isVisible) {
           setCurrentVideo(video);
         } else {
@@ -35,24 +32,53 @@ const Videoapp = () => {
       });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const container = document.querySelector(".container");
+
+    container.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      container.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleVideoClick = (index) => {
+    console.log(index, "index");
+    const clickedVideo = videoRefs.current[index];
+    setCurrentVideo(clickedVideo);
+    if (clickedVideo.paused) {
+      clickedVideo.play();
+    } else {
+      clickedVideo.pause();
+    }
+  };
+
+  const handleSoundToggle = (index) => {
+    console.log(index, "waris index");
+    setIsMuted((prevMuted) => !prevMuted);
+  };
 
   return (
     <div className="container">
       {videoArr.map((arr, index) => {
         const recommendation = arr.data.recommendation;
         return recommendation.map((video, index) => (
-          <div className="video_wrapper" key={video.video_url.med + index}>
+          <div
+            className="video_wrapper  y mandatory-scroll-snapping"
+            key={video.video_url.med + index}
+            dir="ltr"
+            onClick={() => handleVideoClick(index)}
+          >
+            {/* <div
+              className="sound_button"
+              onClick={() => handleSoundToggle(index)}
+            >
+              {isMuted ? "🔇" : "🔊"}
+            </div> */}
             <video
               className="video_container"
               key={video.video_url.med}
               ref={(ref) => (videoRefs.current[index] = ref)}
-              controls={true}
               autoPlay={index === 0 ? true : false}
+              muted={index === 0 ? true : false}
             >
               <source
                 src={video.video_url.med}

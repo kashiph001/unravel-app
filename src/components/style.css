@@ -1,11 +1,7 @@
-video_container::-webkit-media-controls {
-  display: none;
-}
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 96vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 
 .body {
@@ -19,6 +15,7 @@ video_container::-webkit-media-controls {
     width: 100%;
     padding-top: 0;
     padding-bottom: 0;
+    scroll-snap-align: center;
   }
   .video_container {
     height: 101vh;
@@ -40,6 +37,7 @@ video_container::-webkit-media-controls {
     height: 90vh;
     padding-top: 5vh;
     padding-bottom: 5vh;
+    scroll-snap-align: center;
   }
   .video_container {
     height: 100%;
