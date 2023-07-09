@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/unravel-app/static/css/main.ead81de3.css",
+    "main.js": "/unravel-app/static/js/main.67f7814c.js",
+    "index.html": "/unravel-app/index.html",
+    "main.ead81de3.css.map": "/unravel-app/static/css/main.ead81de3.css.map",
+    "main.67f7814c.js.map": "/unravel-app/static/js/main.67f7814c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ead81de3.css",
+    "static/js/main.67f7814c.js"
+  ]
+}
