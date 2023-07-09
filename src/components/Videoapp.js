@@ -7,10 +7,14 @@ const Videoapp = () => {
   const [currentVideo, setCurrentVideo] = useState();
 
   useEffect(() => {
-    console.log(currentVideo);
+    const videosss = videoRefs.current;
+    videosss[0].muted = true;
+  });
+
+  useEffect(() => {
     if (currentVideo) {
+      currentVideo.muted = true;
       currentVideo.play();
-      currentVideo.muted = false;
     }
   }, [currentVideo]);
 
