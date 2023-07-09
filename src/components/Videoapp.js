@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { videoArr } from "../utils/utils";
 import "./style.css";
+import { VscUnmute, VscMute } from "react-icons/vsc";
 
 const Videoapp = () => {
   const videoRefs = useRef([]);
@@ -61,7 +62,11 @@ const Videoapp = () => {
             dir="ltr"
           >
             <div onClick={() => setIsMuted(!isMuted)} className="sound-icon">
-              {isMuted ? "🔇" : "🔊"}
+              {isMuted ? (
+                <VscMute className="custom-icon" />
+              ) : (
+                <VscUnmute className="custom-icon" />
+              )}
             </div>
             <video
               className="video_container"
