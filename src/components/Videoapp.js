@@ -9,7 +9,6 @@ const Videoapp = () => {
   useEffect(() => {
     if (currentVideo) {
       currentVideo.muted = true;
-      currentVideo.play();
     }
   }, [currentVideo]);
 
@@ -24,7 +23,7 @@ const Videoapp = () => {
           rect.bottom >= window.innerHeight / 2;
 
         if (isVisible) {
-          setCurrentVideo(video);
+          video.play();
         } else {
           video.pause();
         }
