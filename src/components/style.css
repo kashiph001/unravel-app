@@ -9,6 +9,17 @@
   margin: 0 !important;
 }
 
+.video_wrapper {
+  position: relative;
+}
+.sound-icon {
+  position: absolute;
+  top: 40px;
+  right: 39%;
+  cursor: pointer;
+  z-index: 1;
+}
+
 @media only screen and (max-width: 768px) {
   .video_wrapper {
     height: 100%;
@@ -23,6 +34,10 @@
     padding: 0;
     margin: 0;
     object-fit: fill !important;
+  }
+  .sound-icon {
+    top: 25px;
+    right: 4%;
   }
 }
 

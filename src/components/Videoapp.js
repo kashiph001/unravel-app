@@ -49,27 +49,25 @@ const Videoapp = () => {
     }
   };
 
+  console.log(isMuted, "hellor not mute");
   return (
     <div className="container">
       {videoArr.map((arr, index) => {
         const recommendation = arr.data.recommendation;
-        return recommendation.map((video, innerIndex) => (
+        return recommendation.map((video, index) => (
           <div
-            className="video_wrapper y mandatory-scroll-snapping"
-            key={video.video_url.med + innerIndex}
+            className="video_wrapper  y mandatory-scroll-snapping"
+            key={video.video_url.med + index}
             dir="ltr"
           >
-            <div
-              className="sound-icon"
-              onClick={() => setIsMuted(!isMuted)}
-            >
+            <div onClick={() => setIsMuted(!isMuted)} className="sound-icon">
               {isMuted ? "🔇" : "🔊"}
             </div>
             <video
               className="video_container"
               key={video.video_url.med}
               ref={(ref) => (videoRefs.current[index] = ref)}
-              autoPlay={innerIndex === 0}
+              autoPlay={index === 0 ? true : false}
               muted={isMuted}
               onClick={() => handleVideoClick(index)}
             >
