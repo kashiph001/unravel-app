@@ -5,14 +5,7 @@ import { VscUnmute, VscMute } from "react-icons/vsc";
 
 const Videoapp = () => {
   const videoRefs = useRef([]);
-  const [currentVideo, setCurrentVideo] = useState();
   const [isMuted, setIsMuted] = useState(true);
-
-  useEffect(() => {
-    if (currentVideo) {
-      currentVideo.muted = true;
-    }
-  }, [currentVideo]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +16,6 @@ const Videoapp = () => {
         const isVisible =
           rect.top < window.innerHeight / 2 &&
           rect.bottom >= window.innerHeight / 2;
-
         if (isVisible) {
           video.play();
         } else {
@@ -42,7 +34,6 @@ const Videoapp = () => {
 
   const handleVideoClick = (index) => {
     const clickedVideo = videoRefs.current[index];
-    setCurrentVideo(clickedVideo);
     if (clickedVideo.paused) {
       clickedVideo.play();
     } else {
